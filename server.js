@@ -37,6 +37,8 @@ app.get("/api/workexperience", (req, res) => {
     });
 });
 
+
+
 // POST new work experience
 app.post("/api/workexperience", (req, res) => {
     const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
@@ -63,6 +65,37 @@ app.post("/api/workexperience", (req, res) => {
         });
     });
 
+});
+
+
+
+//PUT update work experience
+app.put("/api/workexperience/:id", (req, res) =>{
+    const id = req.params.id;
+    const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
+
+    // Validation
+    if ( !companyname || !jobtitle || !location || !startdate || !enddate || !description ){
+        return res.status(400).json({
+            error: "All fields are required"
+        });
+    }
+
+    // SQL query
+    const sql = `
+        UPDATE workexperience
+        SET companyname=?, jobtitle=?, location=?, startdate=?, enddate=?, description=?
+        WHERE id=?
+    `;
+
+    connection.query(sql, [companyname, jobtitle, location, startdate, enddate, description], (err, results) => {
+        if(err) return res.status(500).json({ error: err });
+
+        res.json({
+            message: "Work experience updated",
+            id
+        });
+    });
 });
 
 
