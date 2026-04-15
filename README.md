@@ -13,6 +13,15 @@ API:et erbjuder full CRUD-funktionalitet och returnerar data i JSON format.
 ## Databasstruktur
 Databasen innehåller en tabell: **workexperience**
 ```
+    WORKEXPERIENCE(
+        id INT PRIMARY KEY,
+        companyname VARCHAR(255),
+        jobtitle VARCHAR(255),
+        location VARCHAR(255),
+        startdate DATE,
+        enddate DATE,
+        description TEXT
+    )
 
 ```
 
