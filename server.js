@@ -88,7 +88,7 @@ app.put("/api/workexperience/:id", (req, res) =>{
         WHERE id=?
     `;
 
-    connection.query(sql, [companyname, jobtitle, location, startdate, enddate, description], (err, results) => {
+    connection.query(sql, [companyname, jobtitle, location, startdate, enddate, description, id], (err, results) => {
         if(err) return res.status(500).json({ error: err });
 
         res.json({
