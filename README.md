@@ -56,21 +56,21 @@ Databasen innehåller en tabell: **workexperience**
 Alla endpoints returnerar JSON.
 
 ### GET /api/workexperience
-Hämtar alla poster
+Hämtar alla poster</br>
 **Response:** Lista med objekt
 
 ### POST /api/workexperience
-Skapar en ny post
-**Success:** message: Work experience added
+Skapar en ny post</br>
+**Success:** message: Work experience added</br>
 **Error:** error: All fields are required
 
 ### PUT /api/workexperience
-Uppdaterar en befintligt post
-**Success:** message: Work experience updated
+Uppdaterar en befintligt post</br>
+**Success:** message: Work experience updated</br>
 **Error:** error: All fields are required
 
 ### DELETE /api/workexperience
-Tar bort en specifik post på ID
+Tar bort en specifik post på ID</br>
 **Success:** message: Work experience deleted
 
 ## Testning
