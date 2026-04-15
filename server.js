@@ -28,6 +28,8 @@ app.use(express.json());
 
 // Routes
 app.get("/api/workexperience", (req, res) => {
+
+    // Get workexperiences
     connection.query("SELECT * FROM workexperience", (err, results) => {
         if(err) return res.status(500).json({ error: err });
         res.json(results);
