@@ -26,14 +26,30 @@ connection.connect((err) =>{
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Routes --------------------------->
+
+
+// GET all workexperiences
 app.get("/api/workexperience", (req, res) => {
 
-    // Get workexperiences
     connection.query("SELECT * FROM workexperience", (err, results) => {
         if(err) return res.status(500).json({ error: err });
         res.json(results);
     });
+});
+
+// POST new work experience
+app.post("/api/workexperience", (req, res) => {
+    const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
+
+    // Validation
+    if ( !companyname || !jobtitle || !location || !startdate || !enddate || !description ){
+        return res.status(400).json({
+            error: "All fields are required"
+        });
+    }
+
+    
 });
 
 
