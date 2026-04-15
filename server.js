@@ -28,7 +28,6 @@ app.use(express.json());
 
 // Routes --------------------------->
 
-
 // GET all workexperiences
 app.get("/api/workexperience", (req, res) => {
 
@@ -49,7 +48,21 @@ app.post("/api/workexperience", (req, res) => {
         });
     }
 
-    
+    // SQL query
+    const sql = `
+        INSERT INTO workexperience (companyname, jobtitle, location, startdate, enddate, description)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    connection.query(sql, [companyname, jobtitle, location, startdate, enddate, description], (err, results) => {
+        if(err) return res.status(500).json({ error: err });
+
+        res.json({
+            message: "Work experience added",
+            id: results.insertId
+        });
+    });
+
 });
 
 
@@ -64,7 +77,7 @@ app.post("/api/workexperience", (req, res) => {
 
 
 
-// Startar server
+// Startar server ---------------------->
 app.listen(port, ()=> {
     console.log(`Server is running on port: ${port}`);
 });
