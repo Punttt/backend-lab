@@ -98,7 +98,19 @@ app.put("/api/workexperience/:id", (req, res) =>{
     });
 });
 
+// DELETE 
+app.delete("/api/workexperience/:id", (req, res) => {
+    const id = req.params.id;
 
+    connection.query("DELETE FROM workexperience WHERE id=?", [id], (err, results) => {
+        if(err) return res.status(500).json({ error: err });
+
+        res.json({
+            message: "Work experience deleted",
+            id
+        });
+    });
+});
 
 
 
