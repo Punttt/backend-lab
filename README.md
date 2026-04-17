@@ -1,11 +1,12 @@
 # REST-webbtjänst
-Detta projekt är en REST-webbtjänst som är byggd med node.js/express som hanterar arbetslivserfarenheter via en mySQL-databas.
+Detta projekt är en REST-webbtjänst som är byggd med node.js/express som hanterar arbetslivserfarenheter via en postgre databas.
 API:et erbjuder full CRUD-funktionalitet och returnerar data i JSON format.
 
 ## Tekniker
     - Node.js
     - Express
-    - MySQL
+    - PostgreSQL
+    - pgClient
     - CORS
     - Dotenv
     - Nodemon
@@ -13,15 +14,15 @@ API:et erbjuder full CRUD-funktionalitet och returnerar data i JSON format.
 ## Databasstruktur
 Databasen innehåller en tabell: **workexperience**
 ```
-    WORKEXPERIENCE(
-        id INT PRIMARY KEY,
-        companyname VARCHAR(255),
-        jobtitle VARCHAR(255),
-        location VARCHAR(255),
-        startdate DATE,
-        enddate DATE,
-        description TEXT
-    )
+workexperience (
+    id SERIAL PRIMARY KEY,
+    companyname VARCHAR(255),
+    jobtitle VARCHAR(255),
+    location VARCHAR(255),
+    startdate DATE,
+    enddate DATE,
+    description TEXT
+)
 
 ```
 
@@ -45,6 +46,7 @@ Databasen innehåller en tabell: **workexperience**
     DB_PASSWORD=
     DB_DATABASE=
     PORT=
+
     ```
 
     4. Starta servern
@@ -77,7 +79,8 @@ Tar bort en specifik post på ID</br>
 API:et har testats med:
     - Thunder Client (Tilläg i VScode)'
     - Webbläsare
-    - MySQL workbench phpMyAdmin
+    - pgAdmin
+    - Render postgreSQL dashboard
 
-
+publicerad: https://backend-lab-53gq.onrender.com/
 Skapad av: Pontus Johansson
