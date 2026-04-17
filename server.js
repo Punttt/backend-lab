@@ -35,7 +35,7 @@ app.use(express.json());
 // GET all workexperiences
 app.get("/api/workexperience", async (req, res) => {
     try {
-        const result = await pool.query("SELECT * FROM workexperience");
+        const result = await client.query("SELECT * FROM workexperience");
         res.json(result.rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -48,28 +48,22 @@ app.get("/api/workexperience", async (req, res) => {
 app.post("/api/workexperience", async (req, res) => {
     const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
 
-    // Validation
-    if ( !companyname || !jobtitle || !location || !startdate || !enddate || !description ){
-        return res.status(400).json({
-            error: "All fields are required"
-        });
-    }
-
-    // SQL query
-    const sql = `
+    try {
+        const sql = `
         INSERT INTO workexperience (companyname, jobtitle, location, startdate, enddate, description)
-        VALUES (?, ?, ?, ?, ?, ?)
-    `;
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id
+        `;
 
-    connection.query(sql, [companyname, jobtitle, location, startdate, enddate, description], (err, results) => {
-        if(err) return res.status(500).json({ error: err });
+        const result = await client.query(sql, [
+            companyname, jobtitle, location, startdate, enddate, description
+        ]);
 
-        res.json({
-            message: "Work experience added",
-            id: results.insertId
-        });
-    });
+        res.json({ message: "Work experience added", id: result.rows[0].id });
 
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
 });
 
 
