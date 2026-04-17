@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const pg = require("pg");
+const { Client } = require("pg");
 require("dotenv").config();
 
 const app = express();
