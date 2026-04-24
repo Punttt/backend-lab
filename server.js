@@ -85,6 +85,18 @@ app.put("/api/workexperience/:id", async (req, res) =>{
     const id = req.params.id;
     const { companyname, jobtitle, location, startdate, enddate, description } = req.body;
 
+    // Validering
+    if(
+        !companyname ||
+        !jobtitle ||
+        !location ||
+        !startdate ||
+        !enddate ||
+        !description
+    ) {
+        return res.status(400).json({ error: "Alla fält måste fyllas i." });
+    }
+
     try {
         const sql = `
         UPDATE workexperience
