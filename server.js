@@ -118,6 +118,11 @@ app.put("/api/workexperience/:id", async (req, res) =>{
 app.delete("/api/workexperience/:id", async (req, res) => {
     const id = req.params.id;
 
+    // Validering, kontrollerar om id:t finns
+    if(!id) {
+        res.status(400).json({ error: "Ogiltigt ID." })
+    }
+
     try {
         await client.query("DELETE FROM workexperience WHERE id=$1", [id]);
         res.json({ message: "Work experience deleted", id });
