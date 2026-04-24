@@ -64,16 +64,23 @@ Hämtar alla poster</br>
 ### POST /api/workexperience
 Skapar en ny post</br>
 **Success:** message: Work experience added</br>
-**Error:** error: All fields are required
+**Error:** error: Alla fält måste fyllas i.
+#### Validering
+Alla fält (companyname, jobtitle, location, startdate, enddate, description), kontrolleras med en if-sats. Tomma värden returnerar en 400 Bad request.
 
 ### PUT /api/workexperience
 Uppdaterar en befintligt post</br>
 **Success:** message: Work experience updated</br>
-**Error:** error: All fields are required
+**Error:** error: "Alla fält måste fyllas i."
+#### Validering
+Samma validering som i POST, alla fält måste vara ifyllda. annars returnerar 400 bad request
 
 ### DELETE /api/workexperience
 Tar bort en specifik post på ID</br>
 **Success:** message: Work experience deleted
+**Error** Ogiltigt ID
+#### Validering
+Kontrollerar att ID är giltigt och att posten finns innan radering
 
 ## Testning
 API:et har testats med:
