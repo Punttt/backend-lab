@@ -42,7 +42,17 @@ app.get("/api/workexperience", async (req, res) => {
     }
 });
 
-
+// Komplettering med validering av input
+if(
+    !companyname ||
+    !jobtitle ||
+    !location ||
+    !startdate ||
+    !enddate ||
+    !description
+) {
+    return res.status(400).json({ error: "Alla fält måste fyllas i." });
+}
 
 // POST new work experience
 app.post("/api/workexperience", async (req, res) => {
